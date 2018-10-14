@@ -1,0 +1,1 @@
+processing:ic_launcher512.png
