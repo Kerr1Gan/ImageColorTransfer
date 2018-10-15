@@ -228,8 +228,10 @@ public class MainContentPanel extends JPanel {
     }
 
     public void release() {
-        mWatchThread.interrupt();
-        mWatchThread = null;
+        if (mWatchThread != null) {
+            mWatchThread.interrupt();
+            mWatchThread = null;
+        }
     }
 
     @Override
