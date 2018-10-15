@@ -69,7 +69,7 @@ public class AddColorWindow extends JFrame {
         //label.setPreferredSize(new Dimension(getWidth(), label.getPreferredSize().height));
         contentPanel.setSize(getWidth(), getHeight());
         scrollPane.setPreferredSize(new Dimension(getWidth() - 100, getHeight() - 200));
-        colorOffsetPanel.setPreferredSize(new Dimension(getWidth() - 100, colorOffsetPanel.getPreferredSize().height));
+        colorOffsetPanel.setPreferredSize(new Dimension(getWidth(), colorOffsetPanel.getPreferredSize().height));
         super.doLayout();
     }
 
