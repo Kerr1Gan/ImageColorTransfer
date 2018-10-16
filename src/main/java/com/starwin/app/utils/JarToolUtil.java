@@ -2,11 +2,6 @@ package com.starwin.app.utils;
 
 import java.io.File;
 
-/**
- * @author clayoverwind
- * @version 2017/4/9
- * @E-mail clayanddev@163.com
- */
 public class JarToolUtil {
 
     public static String getJarFilePath() {

@@ -1,6 +1,5 @@
 package com.starwin.app.utils;
 
-
 import com.starwin.app.Main;
 
 import javax.swing.*;
