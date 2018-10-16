@@ -30,7 +30,8 @@ public class ProcessImageColor {
                         continue;
                     }
                     colorOffset = Integer.parseInt(args[i + 1]);
-                    i++;
+                    i += 2;
+                    continue;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -147,6 +148,7 @@ public class ProcessImageColor {
             }
 
         }
+        System.out.println("task end");
     }
 
     private static boolean containsInOffset(int srcColor, int destColor, int offset) {
