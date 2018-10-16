@@ -56,6 +56,9 @@ public class ProcessImageColor {
          * 列出目录中的图片，得到数组
          */
         File[] files = dir.listFiles();
+        if (!dir.isDirectory()) {
+            files = new File[]{dir};
+        }
         /**
          * 遍历数组
          */
