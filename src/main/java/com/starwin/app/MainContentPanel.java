@@ -1,5 +1,6 @@
 package com.starwin.app;
 
+import com.starwin.app.executor.AppExecutors;
 import com.starwin.app.plugin.ProcessImageColor;
 import com.starwin.app.utils.SelectPathHelper;
 import com.starwin.app.window.AddColorWindow;
@@ -107,21 +108,18 @@ public class MainContentPanel extends JPanel {
                     String colorArea = colorWindow.getColorAreaText();
                     String[] colorList = colorArea.split("\n");
                     initLog();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            for (String path : selectedPath) {
-                                List<String> command = new ArrayList<>();
-                                command.add(path);
-                                command.add("-offset");
-                                command.add(offset);
-                                for (int i = 0; i < colorList.length; i++) {
-                                    command.addAll(Arrays.asList(colorList[i].split(" ")));
-                                }
-                                ProcessImageColor.main(command.toArray(new String[]{}));
+                    AppExecutors.getInstance().networkIO().execute(() -> {
+                        for (String path : selectedPath) {
+                            List<String> command = new ArrayList<>();
+                            command.add(path);
+                            command.add("-offset");
+                            command.add(offset);
+                            for (int i = 0; i < colorList.length; i++) {
+                                command.addAll(Arrays.asList(colorList[i].split(" ")));
                             }
+                            ProcessImageColor.main(command.toArray(new String[]{}));
                         }
-                    }).start();
+                    });
                 }
             });
 

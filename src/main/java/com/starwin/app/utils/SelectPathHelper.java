@@ -1,6 +1,8 @@
 package com.starwin.app.utils;
 
 
+import com.starwin.app.executor.AppExecutors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -38,7 +40,7 @@ public class SelectPathHelper {
                     mProgressLabel = null;
                 }
             });
-            Thread t = new Thread(() -> {
+            AppExecutors.getInstance().networkIO().execute(() -> {
                 for (String filePath : path) {
                     File f = new File(filePath);
                     if (f.isDirectory()) {
@@ -73,7 +75,6 @@ public class SelectPathHelper {
                     }
                 }
             });
-            SwingUtilities.invokeLater(t::start);
             jDialog.setVisible(true);
         }
     }
