@@ -1,7 +1,7 @@
 package com.starwin.app.utils;
 
 
-import com.starwin.app.executor.AppExecutors;
+import com.starwin.app.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +40,7 @@ public class SelectPathHelper {
                     mProgressLabel = null;
                 }
             });
-            AppExecutors.getInstance().networkIO().execute(() -> {
+            Main.sExecutors.networkIO().execute(() -> {
                 for (String filePath : path) {
                     File f = new File(filePath);
                     if (f.isDirectory()) {

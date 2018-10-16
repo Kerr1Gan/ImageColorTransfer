@@ -36,17 +36,13 @@ public class AppExecutors {
 
     private final Executor mainThread;
 
-    public static AppExecutors getInstance() {
-        return InnerClass.instance;
-    }
-
     AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
         this.diskIO = diskIO;
         this.networkIO = networkIO;
         this.mainThread = mainThread;
     }
 
-    private AppExecutors() {
+    public AppExecutors() {
         this(new DiskIOThreadExecutor(), Executors.newFixedThreadPool(THREAD_COUNT),
                 new MainThreadExecutor());
     }
@@ -69,9 +65,5 @@ public class AppExecutors {
         public void execute(Runnable command) {
             SwingUtilities.invokeLater(command);
         }
-    }
-
-    private static class InnerClass {
-        private static final AppExecutors instance = new AppExecutors();
     }
 }

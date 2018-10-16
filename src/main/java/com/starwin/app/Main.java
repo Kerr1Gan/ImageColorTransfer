@@ -1,5 +1,7 @@
 package com.starwin.app;
 
+import com.starwin.app.executor.AppExecutors;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -10,6 +12,7 @@ public class Main extends JFrame {
 
     public static final String LOG_FILE_PATH = "system_out.txt";
     public static ByteArrayOutputStream sOutputStream;
+    public static AppExecutors sExecutors = new AppExecutors();
 
     public static void main(String[] args) {
         sOutputStream = new ByteArrayOutputStream();
