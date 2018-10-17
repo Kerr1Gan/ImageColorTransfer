@@ -47,38 +47,38 @@ public class MainContentPanel extends JPanel {
 
     private void addMenu() {
         JMenuBar jMenuBar = new JMenuBar();
-        JMenu menu = new JMenu("æ–‡ä»¶");
-        JMenu menu3 = new JMenu("å¸®åŠ©");
+        JMenu menu = new JMenu("ÎÄ¼ş");
+        JMenu menu3 = new JMenu("°ïÖú");
         jMenuBar.add(menu);
         jMenuBar.add(menu3);
 
-        JMenuItem item = new JMenuItem("é€‰æ‹©æ–‡ä»¶æˆ–è·¯å¾„");
+        JMenuItem item = new JMenuItem("Ñ¡ÔñÎÄ¼ş»òÂ·¾¶");
         item.addActionListener(e -> {
             SelectPathHelper helper = new SelectPathHelper(selectedPath, selectedFiles);
-            helper.show(jFrame);
+            helper.show(jFrame, ((App) jFrame).getAppExecutors().networkIO());
             StringBuilder labelContent = new StringBuilder();
             for (String path : selectedPath) {
                 labelContent.append(path);
                 labelContent.append("<br>");
             }
-            selectLabel.setText(String.format("<html><body>è·¯å¾„ï¼š<br>%s</body></html>", labelContent));
+            selectLabel.setText(String.format("<html><body>Â·¾¶£º<br>%s</body></html>", labelContent));
             revalidate();
         });
 
-        JMenuItem item2 = new JMenuItem("è‰²å€¼æ›¿æ¢");
+        JMenuItem item2 = new JMenuItem("É«ÖµÌæ»»");
         item2.addActionListener(e -> {
 
             AddColorWindow colorWindow = new AddColorWindow();
             colorWindow.setSize(800, 600);
             colorWindow.setLocationRelativeTo(jFrame);
             colorWindow.setVisible(true);
-//            // æ˜¾ç¤ºé¢œè‰²é€‰å–å™¨å¯¹è¯æ¡†, è¿”å›é€‰å–çš„é¢œè‰²ï¼ˆçº¿ç¨‹å°†è¢«é˜»å¡, ç›´åˆ°å¯¹è¯æ¡†è¢«å…³é—­ï¼‰
-//            Color color = JColorChooser.showDialog(jFrame, "é€‰å–é¢œè‰²", null);
-//            // å¦‚æœç”¨æˆ·å–æ¶ˆæˆ–å…³é—­çª—å£, åˆ™è¿”å›çš„ color ä¸º null
+//            // ÏÔÊ¾ÑÕÉ«Ñ¡È¡Æ÷¶Ô»°¿ò, ·µ»ØÑ¡È¡µÄÑÕÉ«£¨Ïß³Ì½«±»×èÈû, Ö±µ½¶Ô»°¿ò±»¹Ø±Õ£©
+//            Color color = JColorChooser.showDialog(jFrame, "Ñ¡È¡ÑÕÉ«", null);
+//            // Èç¹ûÓÃ»§È¡Ïû»ò¹Ø±Õ´°¿Ú, Ôò·µ»ØµÄ color Îª null
 //            if (color == null) {
 //                return;
 //            }
-//            // è·å–é¢œè‰²çš„ ARGB å„ä¸ªåˆ†é‡å€¼
+//            // »ñÈ¡ÑÕÉ«µÄ ARGB ¸÷¸ö·ÖÁ¿Öµ
 //            int alpha = color.getAlpha();
 //            int red = color.getRed();
 //            int green = color.getGreen();
@@ -92,14 +92,14 @@ public class MainContentPanel extends JPanel {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     super.windowClosing(e);
-                    // ç‚¹å‡»Xèµ°è¿™é‡Œï¼Œä¸èµ°Closed
+                    // µã»÷X×ßÕâÀï£¬²»×ßClosed
                     closeByUser = true;
                     e.getWindow().dispose();
                 }
 
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    // çª—å£è°ƒç”¨disposeï¼Œä¸èµ°closingç›´æ¥èµ°closed
+                    // ´°¿Úµ÷ÓÃdispose£¬²»×ßclosingÖ±½Ó×ßclosed
                     if (closeByUser) {
                         return;
                     }
@@ -107,7 +107,7 @@ public class MainContentPanel extends JPanel {
                     String colorArea = colorWindow.getColorAreaText();
                     String[] colorList = colorArea.split("\n");
                     initLog();
-                    Main.sExecutors.networkIO().execute(() -> {
+                    ((App) jFrame).getAppExecutors().networkIO().execute(() -> {
                         for (String path : selectedPath) {
                             List<String> command = new ArrayList<>();
                             command.add(path);
@@ -127,7 +127,7 @@ public class MainContentPanel extends JPanel {
         menu.addSeparator();
         menu.add(item2);
 
-        item = new JMenuItem("é€šè¿‡ipè¿›è¡Œè¿æ¥");
+        item = new JMenuItem("Í¨¹ıip½øĞĞÁ¬½Ó");
         item.addActionListener((e) -> {
         });
         menu3.addMouseListener(new MouseAdapter() {
@@ -137,28 +137,28 @@ public class MainContentPanel extends JPanel {
             }
 
             void showDialog() {
-                // åˆ›å»ºä¸€ä¸ªæ¨¡æ€å¯¹è¯æ¡†
-                final JDialog dialog = new JDialog(jFrame, "é©¬ç”²åŒ…æ­¥éª¤", true);
-                // è®¾ç½®å¯¹è¯æ¡†çš„å®½é«˜
+                // ´´½¨Ò»¸öÄ£Ì¬¶Ô»°¿ò
+                final JDialog dialog = new JDialog(jFrame, "Âí¼×°ü²½Öè", true);
+                // ÉèÖÃ¶Ô»°¿òµÄ¿í¸ß
                 dialog.setSize(300, 150);
-                // è®¾ç½®å¯¹è¯æ¡†å¤§å°ä¸å¯æ”¹å˜
+                // ÉèÖÃ¶Ô»°¿ò´óĞ¡²»¿É¸Ä±ä
                 dialog.setResizable(false);
-                // è®¾ç½®å¯¹è¯æ¡†ç›¸å¯¹æ˜¾ç¤ºçš„ä½ç½®
+                // ÉèÖÃ¶Ô»°¿òÏà¶ÔÏÔÊ¾µÄÎ»ÖÃ
                 dialog.setLocationRelativeTo(jFrame);
 
-                // åˆ›å»ºä¸€ä¸ªæ ‡ç­¾æ˜¾ç¤ºæ¶ˆæ¯å†…å®¹
-                JLabel messageLabel = new JLabel("<html><body>1.æ”¹åŒ…å<br>2.å‡çº§ç‰ˆæœ¬å·<br>3.æ›´æ¢firebaseæ–‡ä»¶<br>4.æ¢logoæ¢UI</body></html>");
+                // ´´½¨Ò»¸ö±êÇ©ÏÔÊ¾ÏûÏ¢ÄÚÈİ
+                JLabel messageLabel = new JLabel("<html><body>1.¸Ä°üÃû<br>2.Éı¼¶°æ±¾ºÅ<br>3.¸ü»»firebaseÎÄ¼ş<br>4.»»logo»»UI</body></html>");
 
 
-                // åˆ›å»ºå¯¹è¯æ¡†çš„å†…å®¹é¢æ¿, åœ¨é¢æ¿å†…å¯ä»¥æ ¹æ®è‡ªå·±çš„éœ€è¦æ·»åŠ ä»»ä½•ç»„ä»¶å¹¶åšä»»æ„æ˜¯å¸ƒå±€
+                // ´´½¨¶Ô»°¿òµÄÄÚÈİÃæ°å, ÔÚÃæ°åÄÚ¿ÉÒÔ¸ù¾İ×Ô¼ºµÄĞèÒªÌí¼ÓÈÎºÎ×é¼ş²¢×öÈÎÒâÊÇ²¼¾Ö
                 JPanel panel = new JPanel();
 
-                // æ·»åŠ ç»„ä»¶åˆ°é¢æ¿
+                // Ìí¼Ó×é¼şµ½Ãæ°å
                 panel.add(messageLabel);
 
-                // è®¾ç½®å¯¹è¯æ¡†çš„å†…å®¹é¢æ¿
+                // ÉèÖÃ¶Ô»°¿òµÄÄÚÈİÃæ°å
                 dialog.setContentPane(panel);
-                // æ˜¾ç¤ºå¯¹è¯æ¡†
+                // ÏÔÊ¾¶Ô»°¿ò
                 dialog.setVisible(true);
             }
         });
@@ -193,7 +193,7 @@ public class MainContentPanel extends JPanel {
                     e.printStackTrace();
                     break;
                 }
-                SwingUtilities.invokeLater(() -> logLabel.setText(String.format("<html><body>%s</body></html>", Main.sOutputStream.toString().replace("\n", "<br>"))));
+                SwingUtilities.invokeLater(() -> logLabel.setText(String.format("<html><body>%s</body></html>", ((App) jFrame).getOutputStream().toString().replace("\n", "<br>"))));
             }
 //            try {
 //                Path logPath = Paths.get(new File("").getAbsolutePath());

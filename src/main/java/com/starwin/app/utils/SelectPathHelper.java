@@ -1,7 +1,5 @@
 package com.starwin.app.utils;
 
-import com.starwin.app.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -9,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 @SuppressWarnings("Duplicates")
 public class SelectPathHelper {
@@ -22,8 +21,8 @@ public class SelectPathHelper {
         mSharedFiles = sharedFiles;
     }
 
-    public void show(Frame parent) {
-        String[] path = chooseFileToImport("é€‰æ‹©æ–‡ä»¶æˆ–è·¯å¾„", parent);
+    public void show(Frame parent, Executor executor) {
+        String[] path = chooseFileToImport("Ñ¡ÔñÎÄ¼þ»òÂ·¾¶", parent);
         if (path != null) {
             mSharedPath.addAll(Arrays.asList(path));
             JDialog jDialog = new JDialog(parent, true);
@@ -39,7 +38,7 @@ public class SelectPathHelper {
                     mProgressLabel = null;
                 }
             });
-            Main.sExecutors.networkIO().execute(() -> {
+            executor.execute(() -> {
                 for (String filePath : path) {
                     File f = new File(filePath);
                     if (f.isDirectory()) {

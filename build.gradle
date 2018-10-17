@@ -2,13 +2,26 @@ group 'com.starwin'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
-
+apply plugin: 'idea'
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+def generatedMain = new File(buildDir, "generated/main")
+
+compileJava {
+    doFirst {
+        generatedMain.mkdirs()
+    }
+    options.compilerArgs += ['-s', generatedMain]
+}
+idea.module.sourceDirs += generatedMain
+
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.google.dagger:dagger:2.0'
+    compileOnly  'com.google.dagger:dagger-compiler:2.0'
 }

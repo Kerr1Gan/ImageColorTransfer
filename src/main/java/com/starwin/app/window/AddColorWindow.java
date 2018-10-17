@@ -21,16 +21,16 @@ public class AddColorWindow extends JFrame {
     }
 
     private void init() {
-        setTitle("è®¾ç½®éœ€è¦æ›¿æ¢çš„é¢œè‰²");
+        setTitle("ÉèÖÃĞèÒªÌæ»»µÄÑÕÉ«");
         empty = new JLabel();
-        JLabel label = new JLabel("ä¾‹å¦‚:{åŸå§‹é¢œè‰²RGBå€¼} {æ›¿æ¢åé¢œè‰²RGBå€¼} -> 255 0 0 0 255 0ã€‚æ¢è¡Œæ”¯æŒå¤šä¸ªé¢œè‰²æ›¿æ¢", JLabel.CENTER);
+        JLabel label = new JLabel("ÀıÈç:{Ô­Ê¼ÑÕÉ«RGBÖµ} {Ìæ»»ºóÑÕÉ«RGBÖµ} -> 255 0 0 0 255 0¡£»»ĞĞÖ§³Ö¶à¸öÑÕÉ«Ìæ»»", JLabel.CENTER);
         contentPanel = new JPanel();
-        // åˆ›å»ºä¸€ä¸ª 5 è¡Œ 10 åˆ—çš„æ–‡æœ¬åŒºåŸŸ
+        // ´´½¨Ò»¸ö 5 ĞĞ 10 ÁĞµÄÎÄ±¾ÇøÓò
         textArea = new JTextArea();
-        // è®¾ç½®è‡ªåŠ¨æ¢è¡Œ
+        // ÉèÖÃ×Ô¶¯»»ĞĞ
         textArea.setLineWrap(true);
 
-        JButton button = new JButton("ç¡®å®š");
+        JButton button = new JButton("È·¶¨");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,7 +39,7 @@ public class AddColorWindow extends JFrame {
         });
 
 
-        // åˆ›å»ºå‡¸èµ·è¾¹æ¡†
+        // ´´½¨Í¹Æğ±ß¿ò
         Border border = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
         textArea.setBorder(border);
         scrollPane = new JScrollPane(textArea,
@@ -52,7 +52,7 @@ public class AddColorWindow extends JFrame {
 
         // add text field
         colorText = new JTextField(8);
-        JLabel text = new JLabel("é¢œè‰²åå·®å€¼(å¯é€‰)ï¼š");
+        JLabel text = new JLabel("ÑÕÉ«Æ«²îÖµ(¿ÉÑ¡)£º");
         colorOffsetPanel = new JPanel();
         colorOffsetPanel.add(text);
         colorOffsetPanel.add(colorText);
