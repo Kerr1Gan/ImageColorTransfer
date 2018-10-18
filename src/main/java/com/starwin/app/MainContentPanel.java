@@ -61,8 +61,10 @@ public class MainContentPanel extends JPanel {
                 labelContent.append(path);
                 labelContent.append("<br>");
             }
-            selectLabel.setText(String.format("<html><body>路径：<br>%s</body></html>", labelContent));
-            revalidate();
+            ((App) jFrame).getAppExecutors().mainThread().execute(() -> {
+                selectLabel.setText(String.format("<html><body>路径：<br>%s</body></html>", labelContent));
+                revalidate();
+            });
         });
 
         JMenuItem item2 = new JMenuItem("色值替换");

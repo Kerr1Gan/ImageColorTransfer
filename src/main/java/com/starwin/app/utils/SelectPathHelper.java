@@ -26,7 +26,7 @@ public class SelectPathHelper {
         if (path != null) {
             mSharedPath.addAll(Arrays.asList(path));
             JDialog jDialog = new JDialog(parent, true);
-            jDialog.setBounds(0, 0, 300, 200);
+            jDialog.setPreferredSize(new Dimension(300,200));
             jDialog.setLayout(new BorderLayout());
             mProgressLabel = new JLabel("Running ");
             mProgressLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -38,40 +38,42 @@ public class SelectPathHelper {
                     mProgressLabel = null;
                 }
             });
-            executor.execute(() -> {
-                for (String filePath : path) {
-                    File f = new File(filePath);
-                    if (f.isDirectory()) {
-                        List<File> ret = FileUtil.getDirFileList(new ArrayList<>(), f);
-                        int index = 0;
-                        for (File file : ret) {
-                            if (mProgressLabel == null) {
-                                break;
+            SwingUtilities.invokeLater(()->{
+                executor.execute(() -> {
+                    for (String filePath : path) {
+                        File f = new File(filePath);
+                        if (f.isDirectory()) {
+                            List<File> ret = FileUtil.getDirFileList(new ArrayList<>(), f);
+                            int index = 0;
+                            for (File file : ret) {
+                                if (mProgressLabel == null) {
+                                    break;
+                                }
+                                if (mSharedFiles.indexOf(file) < 0) {
+                                    mSharedFiles.add(file);
+                                }
+                                mProgressLabel.setText("Running " + (int) (((index++) * 1.0f) / (ret.size() * 1.0f) * 100) + "%");
                             }
-                            if (mSharedFiles.indexOf(file) < 0) {
-                                mSharedFiles.add(file);
+                        } else {
+                            if (mSharedFiles.indexOf(f) < 0) {
+                                mSharedFiles.add(f);
                             }
-                            mProgressLabel.setText("Running " + (int) (((index++) * 1.0f) / (ret.size() * 1.0f) * 100) + "%");
+                            mProgressLabel.setText("Running " + "100%");
                         }
-                    } else {
-                        if (mSharedFiles.indexOf(f) < 0) {
-                            mSharedFiles.add(f);
+//                    Map<String, List<String>> map = new LinkedHashMap<>();
+//                    setupFiles(mSharedFiles, "Movie", map, FileUtil.MOVIE_FORMAT);
+//                    setupFiles(mSharedFiles, "Music", map, FileUtil.MP3_FORMAT);
+//                    setupFiles(mSharedFiles, "Photo", map, FileUtil.IMG_FORMAT);
+//                    setupFiles(mSharedFiles, "Doc", map, FileUtil.DOC_FORMAT);
+//                    setupFiles(mSharedFiles, "Apk", map, FileUtil.APP_FORMAT);
+//                    setupFiles(mSharedFiles, "Rar", map, FileUtil.RAR_FORMAT);
+                        jDialog.setVisible(false);
+                        jDialog.dispose();
+                        if (mProgressLabel == null) {
+                            return;
                         }
-                        mProgressLabel.setText("Running " + "100%");
                     }
-                    Map<String, List<String>> map = new LinkedHashMap<>();
-                    setupFiles(mSharedFiles, "Movie", map, FileUtil.MOVIE_FORMAT);
-                    setupFiles(mSharedFiles, "Music", map, FileUtil.MP3_FORMAT);
-                    setupFiles(mSharedFiles, "Photo", map, FileUtil.IMG_FORMAT);
-                    setupFiles(mSharedFiles, "Doc", map, FileUtil.DOC_FORMAT);
-                    setupFiles(mSharedFiles, "Apk", map, FileUtil.APP_FORMAT);
-                    setupFiles(mSharedFiles, "Rar", map, FileUtil.RAR_FORMAT);
-                    jDialog.setVisible(false);
-                    jDialog.dispose();
-                    if (mProgressLabel == null) {
-                        return;
-                    }
-                }
+                });
             });
             jDialog.setVisible(true);
         }

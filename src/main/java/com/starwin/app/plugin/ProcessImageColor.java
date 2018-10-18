@@ -83,6 +83,9 @@ public class ProcessImageColor {
                  * 用ImageIO将图片读入到缓冲中
                  */
                 bi = ImageIO.read(files[x]);
+                if (bi == null) {
+                    continue;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 continue;
