@@ -17,7 +17,7 @@ public class JarToolUtil {
     private static File getFile() {
         String path = JarToolUtil.class.getProtectionDomain().getCodeSource().getLocation().getFile();
         try {
-            path = java.net.URLDecoder.decode(path, "UTF-8"); // ×ª»»´¦ÀíÖĞÎÄ¼°¿Õ¸ñ
+            path = java.net.URLDecoder.decode(path, "UTF-8"); // è½¬æ¢å¤„ç†ä¸­æ–‡åŠç©ºæ ¼
         } catch (java.io.UnsupportedEncodingException e) {
             return null;
         }
