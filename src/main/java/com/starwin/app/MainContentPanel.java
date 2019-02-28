@@ -47,12 +47,12 @@ public class MainContentPanel extends JPanel {
 
     private void addMenu() {
         JMenuBar jMenuBar = new JMenuBar();
-        JMenu menu = new JMenu("ÎÄ¼ş");
-        JMenu menu3 = new JMenu("°ïÖú");
+        JMenu menu = new JMenu("æ–‡ä»¶");
+        JMenu menu3 = new JMenu("å¸®åŠ©");
         jMenuBar.add(menu);
         jMenuBar.add(menu3);
 
-        JMenuItem item = new JMenuItem("Ñ¡ÔñÎÄ¼ş»òÂ·¾¶");
+        JMenuItem item = new JMenuItem("é€‰æ‹©æ–‡ä»¶æˆ–è·¯å¾„");
         item.addActionListener(e -> {
             SelectPathHelper helper = new SelectPathHelper(selectedPath, selectedFiles);
             helper.show(jFrame, ((App) jFrame).getAppExecutors().networkIO());
@@ -62,25 +62,25 @@ public class MainContentPanel extends JPanel {
                 labelContent.append("<br>");
             }
             ((App) jFrame).getAppExecutors().mainThread().execute(() -> {
-                selectLabel.setText(String.format("<html><body>Â·¾¶£º<br>%s</body></html>", labelContent));
+                selectLabel.setText(String.format("<html><body>è·¯å¾„ï¼š<br>%s</body></html>", labelContent));
                 revalidate();
             });
         });
 
-        JMenuItem item2 = new JMenuItem("É«ÖµÌæ»»");
+        JMenuItem item2 = new JMenuItem("è‰²å€¼æ›¿æ¢");
         item2.addActionListener(e -> {
 
             AddColorWindow colorWindow = new AddColorWindow();
             colorWindow.setSize(800, 600);
             colorWindow.setLocationRelativeTo(jFrame);
             colorWindow.setVisible(true);
-//            // ÏÔÊ¾ÑÕÉ«Ñ¡È¡Æ÷¶Ô»°¿ò, ·µ»ØÑ¡È¡µÄÑÕÉ«£¨Ïß³Ì½«±»×èÈû, Ö±µ½¶Ô»°¿ò±»¹Ø±Õ£©
-//            Color color = JColorChooser.showDialog(jFrame, "Ñ¡È¡ÑÕÉ«", null);
-//            // Èç¹ûÓÃ»§È¡Ïû»ò¹Ø±Õ´°¿Ú, Ôò·µ»ØµÄ color Îª null
+//            // æ˜¾ç¤ºé¢œè‰²é€‰å–å™¨å¯¹è¯æ¡†, è¿”å›é€‰å–çš„é¢œè‰²ï¼ˆçº¿ç¨‹å°†è¢«é˜»å¡, ç›´åˆ°å¯¹è¯æ¡†è¢«å…³é—­ï¼‰
+//            Color color = JColorChooser.showDialog(jFrame, "é€‰å–é¢œè‰²", null);
+//            // å¦‚æœç”¨æˆ·å–æ¶ˆæˆ–å…³é—­çª—å£, åˆ™è¿”å›çš„ color ä¸º null
 //            if (color == null) {
 //                return;
 //            }
-//            // »ñÈ¡ÑÕÉ«µÄ ARGB ¸÷¸ö·ÖÁ¿Öµ
+//            // è·å–é¢œè‰²çš„ ARGB å„ä¸ªåˆ†é‡å€¼
 //            int alpha = color.getAlpha();
 //            int red = color.getRed();
 //            int green = color.getGreen();
@@ -94,14 +94,14 @@ public class MainContentPanel extends JPanel {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     super.windowClosing(e);
-                    // µã»÷X×ßÕâÀï£¬²»×ßClosed
+                    // ç‚¹å‡»Xèµ°è¿™é‡Œï¼Œä¸èµ°Closed
                     closeByUser = true;
                     e.getWindow().dispose();
                 }
 
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    // ´°¿Úµ÷ÓÃdispose£¬²»×ßclosingÖ±½Ó×ßclosed
+                    // çª—å£è°ƒç”¨disposeï¼Œä¸èµ°closingç›´æ¥èµ°closed
                     if (closeByUser) {
                         return;
                     }
@@ -129,7 +129,7 @@ public class MainContentPanel extends JPanel {
         menu.addSeparator();
         menu.add(item2);
 
-        item = new JMenuItem("Í¨¹ıip½øĞĞÁ¬½Ó");
+        item = new JMenuItem("é€šè¿‡ipè¿›è¡Œè¿æ¥");
         item.addActionListener((e) -> {
         });
         menu3.addMouseListener(new MouseAdapter() {
@@ -139,28 +139,28 @@ public class MainContentPanel extends JPanel {
             }
 
             void showDialog() {
-                // ´´½¨Ò»¸öÄ£Ì¬¶Ô»°¿ò
-                final JDialog dialog = new JDialog(jFrame, "Âí¼×°ü²½Öè", true);
-                // ÉèÖÃ¶Ô»°¿òµÄ¿í¸ß
+                // åˆ›å»ºä¸€ä¸ªæ¨¡æ€å¯¹è¯æ¡†
+                final JDialog dialog = new JDialog(jFrame, "é©¬ç”²åŒ…æ­¥éª¤", true);
+                // è®¾ç½®å¯¹è¯æ¡†çš„å®½é«˜
                 dialog.setSize(300, 150);
-                // ÉèÖÃ¶Ô»°¿ò´óĞ¡²»¿É¸Ä±ä
+                // è®¾ç½®å¯¹è¯æ¡†å¤§å°ä¸å¯æ”¹å˜
                 dialog.setResizable(false);
-                // ÉèÖÃ¶Ô»°¿òÏà¶ÔÏÔÊ¾µÄÎ»ÖÃ
+                // è®¾ç½®å¯¹è¯æ¡†ç›¸å¯¹æ˜¾ç¤ºçš„ä½ç½®
                 dialog.setLocationRelativeTo(jFrame);
 
-                // ´´½¨Ò»¸ö±êÇ©ÏÔÊ¾ÏûÏ¢ÄÚÈİ
-                JLabel messageLabel = new JLabel("<html><body>1.¸Ä°üÃû<br>2.Éı¼¶°æ±¾ºÅ<br>3.¸ü»»firebaseÎÄ¼ş<br>4.»»logo»»UI</body></html>");
+                // åˆ›å»ºä¸€ä¸ªæ ‡ç­¾æ˜¾ç¤ºæ¶ˆæ¯å†…å®¹
+                JLabel messageLabel = new JLabel("<html><body>1.æ”¹åŒ…å<br>2.å‡çº§ç‰ˆæœ¬å·<br>3.æ›´æ¢firebaseæ–‡ä»¶<br>4.æ¢logoæ¢UI</body></html>");
 
 
-                // ´´½¨¶Ô»°¿òµÄÄÚÈİÃæ°å, ÔÚÃæ°åÄÚ¿ÉÒÔ¸ù¾İ×Ô¼ºµÄĞèÒªÌí¼ÓÈÎºÎ×é¼ş²¢×öÈÎÒâÊÇ²¼¾Ö
+                // åˆ›å»ºå¯¹è¯æ¡†çš„å†…å®¹é¢æ¿, åœ¨é¢æ¿å†…å¯ä»¥æ ¹æ®è‡ªå·±çš„éœ€è¦æ·»åŠ ä»»ä½•ç»„ä»¶å¹¶åšä»»æ„æ˜¯å¸ƒå±€
                 JPanel panel = new JPanel();
 
-                // Ìí¼Ó×é¼şµ½Ãæ°å
+                // æ·»åŠ ç»„ä»¶åˆ°é¢æ¿
                 panel.add(messageLabel);
 
-                // ÉèÖÃ¶Ô»°¿òµÄÄÚÈİÃæ°å
+                // è®¾ç½®å¯¹è¯æ¡†çš„å†…å®¹é¢æ¿
                 dialog.setContentPane(panel);
-                // ÏÔÊ¾¶Ô»°¿ò
+                // æ˜¾ç¤ºå¯¹è¯æ¡†
                 dialog.setVisible(true);
             }
         });

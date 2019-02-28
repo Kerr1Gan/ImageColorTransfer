@@ -30,7 +30,7 @@ public class StringUtil {
         StringBuilder sb = new StringBuilder();
         try {
             gZipIs = new GZIPInputStream(is);
-            InputStreamReader isr = new InputStreamReader(gZipIs, "utf-8"); // ÉèÖÃ¶ÁÈ¡Á÷µÄ±àÂë¸ñÊ½£¬×Ô¶¨Òå±àÂë
+            InputStreamReader isr = new InputStreamReader(gZipIs, "utf-8"); // è®¾ç½®è¯»å–æµçš„ç¼–ç æ ¼å¼ï¼Œè‡ªå®šä¹‰ç¼–ç 
             BufferedReader br = new BufferedReader(isr);
 
             String tempbf;
@@ -70,7 +70,7 @@ public class StringUtil {
     }
 
     public static String removeSpecialChar(String str) {
-        String regEx = "[ `~!@#$%^&*()+=|{}':;',\\[\\].<>/?~£¡@#£¤%¡­¡­&*£¨£©¡ª¡ª+|{}¡¾¡¿¡®£»£º¡±¡°¡¯¡££¬¡¢£¿]";
+        String regEx = "[ `~!@#$%^&*()+=|{}':;',\\[\\].<>/?~ï¼@#ï¿¥%â€¦â€¦&*ï¼ˆï¼‰â€”â€”+|{}ã€ã€‘â€˜ï¼›ï¼šâ€â€œâ€™ã€‚ï¼Œã€ï¼Ÿ]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
         return m.replaceAll("").trim();

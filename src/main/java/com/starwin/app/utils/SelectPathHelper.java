@@ -22,7 +22,7 @@ public class SelectPathHelper {
     }
 
     public void show(Frame parent, Executor executor) {
-        String[] path = chooseFileToImport("选择文件或路径", parent);
+        String[] path = chooseFileToImport("閫夋嫨鏂囦欢澶规垨鏂囦欢", parent);
         if (path != null) {
             mSharedPath.addAll(Arrays.asList(path));
             JDialog jDialog = new JDialog(parent, true);

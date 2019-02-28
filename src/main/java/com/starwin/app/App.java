@@ -35,7 +35,7 @@ public class App extends JFrame {
         System.setOut(cacheStream);
         this.setSize(1040, 800);
         this.setLocationRelativeTo(null);
-        this.setTitle("Âí¼×°ü¹¤¾ß");
+        this.setTitle("é©¬å®¶åŒ…å·¥å…·");
         this.setLookAndFeel();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {

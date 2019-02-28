@@ -50,18 +50,18 @@ public class ProcessImageColor {
         }
 
         /**
-         * Òª´¦ÀíµÄÍ¼Æ¬Ä¿Â¼
+         * è¦å¤„ç†çš„å›¾ç‰‡ç›®å½•
          */
         File dir = new File(workPath);
         /**
-         * ÁĞ³öÄ¿Â¼ÖĞµÄÍ¼Æ¬£¬µÃµ½Êı×é
+         * åˆ—å‡ºç›®å½•ä¸­çš„å›¾ç‰‡ï¼Œå¾—åˆ°æ•°ç»„
          */
         File[] files = dir.listFiles();
         if (!dir.isDirectory()) {
             files = new File[]{dir};
         }
         /**
-         * ±éÀúÊı×é
+         * éå†æ•°ç»„
          */
         if (files == null) {
             return;
@@ -71,16 +71,16 @@ public class ProcessImageColor {
                 continue;
             }
             /**
-             * ¶¨ÒåÒ»¸öRGBµÄÊı×é£¬ÒòÎªÍ¼Æ¬µÄRGBÄ£Ê½ÊÇÓÉÈı¸ö 0-255À´±íÊ¾µÄ ±ÈÈç°×É«¾ÍÊÇ(255,255,255)
+             * å®šä¹‰ä¸€ä¸ªRGBçš„æ•°ç»„ï¼Œå› ä¸ºå›¾ç‰‡çš„RGBæ¨¡å¼æ˜¯ç”±ä¸‰ä¸ª 0-255æ¥è¡¨ç¤ºçš„ æ¯”å¦‚ç™½è‰²å°±æ˜¯(255,255,255)
              */
             int[] rgb = new int[3];
             /**
-             * ÓÃÀ´´¦ÀíÍ¼Æ¬µÄ»º³åÁ÷
+             * ç”¨æ¥å¤„ç†å›¾ç‰‡çš„ç¼“å†²æµ
              */
             BufferedImage bi = null;
             try {
                 /**
-                 * ÓÃImageIO½«Í¼Æ¬¶ÁÈëµ½»º³åÖĞ
+                 * ç”¨ImageIOå°†å›¾ç‰‡è¯»å…¥åˆ°ç¼“å†²ä¸­
                  */
                 bi = ImageIO.read(files[x]);
                 if (bi == null) {
@@ -91,7 +91,7 @@ public class ProcessImageColor {
                 continue;
             }
             /**
-             * µÃµ½Í¼Æ¬µÄ³¤¿í
+             * å¾—åˆ°å›¾ç‰‡çš„é•¿å®½
              */
             int width = bi.getWidth();
             int height = bi.getHeight();
@@ -100,8 +100,8 @@ public class ProcessImageColor {
             BufferedImage temp = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
             System.out.println("processing:" + files[x].getName());
             /**
-             * ÕâÀïÊÇ±éÀúÍ¼Æ¬µÄÏñËØ£¬ÒòÎªÒª´¦ÀíÍ¼Æ¬µÄ±³É«£¬ËùÒÔÒª°ÑÖ¸¶¨ÏñËØÉÏµÄÑÕÉ«»»³ÉÄ¿±êÑÕÉ«
-             * ÕâÀï ÊÇÒ»¸ö¶ş²ãÑ­»·£¬±éÀú³¤ºÍ¿íÉÏµÄÃ¿¸öÏñËØ
+             * è¿™é‡Œæ˜¯éå†å›¾ç‰‡çš„åƒç´ ï¼Œå› ä¸ºè¦å¤„ç†å›¾ç‰‡çš„èƒŒè‰²ï¼Œæ‰€ä»¥è¦æŠŠæŒ‡å®šåƒç´ ä¸Šçš„é¢œè‰²æ¢æˆç›®æ ‡é¢œè‰²
+             * è¿™é‡Œ æ˜¯ä¸€ä¸ªäºŒå±‚å¾ªç¯ï¼Œéå†é•¿å’Œå®½ä¸Šçš„æ¯ä¸ªåƒç´ 
              */
             boolean hasChanged = false;
             for (int i = minx; i < width; i++) {
@@ -110,11 +110,11 @@ public class ProcessImageColor {
                         return;
                     }
                     /**
-                     * µÃµ½Ö¸¶¨ÏñËØ£¨i,j)ÉÏµÄRGBÖµ£¬
+                     * å¾—åˆ°æŒ‡å®šåƒç´ ï¼ˆi,j)ä¸Šçš„RGBå€¼ï¼Œ
                      */
                     int pixel = bi.getRGB(i, j);
                     /**
-                     * ·Ö±ğ½øĞĞÎ»²Ù×÷µÃµ½ r g bÉÏµÄÖµ
+                     * åˆ†åˆ«è¿›è¡Œä½æ“ä½œå¾—åˆ° r g bä¸Šçš„å€¼
                      */
                     rgb[0] = (pixel & 0xff0000) >> 16;
                     rgb[1] = (pixel & 0xff00) >> 8;
@@ -127,9 +127,9 @@ public class ProcessImageColor {
                         int[] destArray = colorReplace.get(k + 1);
                         if (containsInOffset(srcArray[0], rgb[0], colorOffset) && containsInOffset(srcArray[1], rgb[1], colorOffset) && containsInOffset(srcArray[2], rgb[2], colorOffset)) {
                             /**
-                             * ÕâÀïÊÇÅĞ¶ÏÍ¨¹ı£¬Ôò°Ñ¸ÃÏñËØ»»³É°×É«
+                             * è¿™é‡Œæ˜¯åˆ¤æ–­é€šè¿‡ï¼Œåˆ™æŠŠè¯¥åƒç´ æ¢æˆç™½è‰²
                              */
-                            pixel = (alpha << 24)/*alphaÖµ*/ | (destArray[0] << 16) | (destArray[1] << 8) | (destArray[2]);
+                            pixel = (alpha << 24)/*alphaå€¼*/ | (destArray[0] << 16) | (destArray[1] << 8) | (destArray[2]);
                             temp.setRGB(i, j, pixel);
                             hasChanged = true;
                         }
@@ -139,7 +139,7 @@ public class ProcessImageColor {
             System.out.println("processed:" + files[x].getName() + " " + (hasChanged ? "changed" : ""));
             System.out.println();
             /**
-             * ½«»º³å¶ÔÏó±£´æµ½ĞÂÎÄ¼şÖĞ
+             * å°†ç¼“å†²å¯¹è±¡ä¿å­˜åˆ°æ–°æ–‡ä»¶ä¸­
              */
             try {
                 String name = files[x].getName().substring(0, files[x].getName().indexOf("."));
